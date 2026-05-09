@@ -1,56 +1,27 @@
-import { useState } from "react";
-import "./App.css";
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import Features from './components/Features'
+import TaskSection from './components/TaskSection'
 
-function App() {
-  const [text, setText] = useState("");
-  const [task, setTask] = useState("analyze");
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  async function handleAnalyze() {
-    setLoading(true);
-    setResult(null);
-
-    const response = await fetch(`http://127.0.0.1:8000/${task}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text }),
-    });
-
-    const data = await response.json();
-
-    setResult(data);
-    setLoading(false);
-  }
-
+export default function App() {
   return (
-    <div className="container">
-      <h1>AI Text Processing Toolkit</h1>
+    <div style={{ minHeight: '100vh', background: '#080808', color: '#fafafa' }}>
+      <Navbar />
+      <Hero />
+      <Features />
+      <TaskSection />
 
-      <textarea
-        placeholder="Enter text here..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-
-      <select value={task} onChange={(e) => setTask(e.target.value)}>
-        <option value="analyze">Analyze All</option>
-        <option value="summarize">Summarize</option>
-        <option value="keywords">Extract Keywords</option>
-        <option value="classify">Classify</option>
-      </select>
-
-      <button onClick={handleAnalyze} disabled={loading || !text}>
-        {loading ? "Processing..." : "Analyze"}
-      </button>
-
-      {result && (
-        <pre className="result">{JSON.stringify(result, null, 2)}</pre>
-      )}
+      <footer style={{
+        padding: '40px 24px',
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+        textAlign: 'center',
+        color: '#3f3f46',
+        fontSize: '13px',
+      }}>
+        Built with React + FastAPI
+        <span style={{ margin: '0 12px', opacity: 0.4 }}>·</span>
+        <span style={{ color: 'rgba(163,230,53,0.5)' }}>AIToolkit</span>
+      </footer>
     </div>
-  );
+  )
 }
-
-export default App;
