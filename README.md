@@ -121,7 +121,37 @@ http://127.0.0.1:8000/docs
 ```
 
 ---
+## Frontend Setup
 
+Move into frontend folder:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run frontend:
+
+```bash
+npm run dev
+```
+
+Frontend runs on:
+
+```text
+http://localhost:5173
+```
+
+Make sure FastAPI backend is also running:
+
+```bash
+uvicorn app.api:app --reload
+```
 ## Example Output
 
 ```json
@@ -136,7 +166,6 @@ http://127.0.0.1:8000/docs
 
 ## Future Improvements
 
-- Frontend UI
 - RAG integration
 - Evaluation metrics
 - Database support
